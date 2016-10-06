@@ -1,30 +1,36 @@
 import React, { PropTypes } from 'react'
 import Post from './Post'
 
-const PostList = ({ posts }) => {
-  return (
-    <ul>
-      {
-        posts.map(post =>
-          <Post
-            key={post.id}
-            {...post}
-          />
-      )}
-    </ul>
-  )
-}
+class PostList extends React.Component {
+  componentWillMount () {
+    console.log('PostList will mount')
+    this.props.fetchPosts()
+  }
 
-PostList.componentWillMount = () => {
-  console.log('componentWillMount')
-}
+  render () {
+    const posts = this.props.posts
+    return (
+      <ul>
+        {
+          posts.map(post =>
+            <Post
+              key={post.id}
+              {...post}
+            />
+        )}
+      </ul>
+    )
+  }
 
-PostList.propTypes = {
-  posts: PropTypes.arrayOf(PropTypes.shape({
-    id: PropTypes.number.isRequired,
-    title: PropTypes.string.isRequired,
-    author: PropTypes.string.isRequired
-  }).isRequired).isRequired
+  static propTypes = {
+    posts: PropTypes.arrayOf(PropTypes.shape({
+      id: PropTypes.number.isRequired,
+      title: PropTypes.string.isRequired,
+      author: PropTypes.string.isOptional
+    }).isRequired).isRequired,
+
+    fetchPosts: PropTypes.func.isRequired
+  }
 }
 
 export default PostList

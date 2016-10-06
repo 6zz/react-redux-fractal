@@ -9,9 +9,9 @@ function postsReducer (state = {
   switch (action.type) {
     case REQUEST_POSTS:
       console.log('requesting posts...')
-      return
+      return state
     case RECEIVE_POSTS:
-      return Object.assign({}, state, { items: action.posts })
+      return Object.assign({}, state, { items: action.items })
     default:
       return state
   }
