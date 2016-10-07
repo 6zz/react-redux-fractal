@@ -13,10 +13,15 @@ export const RECEIVE_POSTS = 'RECEIVE_POSTS'
 function receivePosts (json) {
   return {
     type: RECEIVE_POSTS,
-    items: json.map(post => ({
-      id: post.id,
-      title: post.title.rendered
-    }))
+    items: json.map(post => (
+      Object.assign(
+        {},
+        post,
+        {
+          title: post.title.rendered
+        }
+      )
+    ))
   }
 }
 

@@ -1,7 +1,7 @@
 import { injectReducer } from '../../store/reducers'
 
 export default (store) => ({
-  path: 'posts',
+  path: 'stories',
   getComponent (nextState, cb) {
     require.ensure([], (require) => {
       /*  Webpack - use require callback to define
@@ -15,6 +15,6 @@ export default (store) => ({
       cb(null, PostList)
 
     /* Webpack named bundle   */
-    }, 'posts')
+  }, 'stories')
   }
 })
