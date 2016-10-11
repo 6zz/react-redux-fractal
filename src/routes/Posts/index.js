@@ -1,6 +1,9 @@
 import { injectReducer } from '../../store/reducers'
 
 export default (store) => ({
+  onEnter: () => {
+    console.log('entering PostList route');
+  },
   path: 'stories',
   getComponent (nextState, cb) {
     require.ensure([], (require) => {
@@ -15,6 +18,7 @@ export default (store) => ({
       cb(null, PostList)
 
     /* Webpack named bundle   */
-  }, 'stories')
-  }
+    }, 'stories')
+  },
+
 })

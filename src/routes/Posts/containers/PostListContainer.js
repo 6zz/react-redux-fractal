@@ -1,5 +1,5 @@
 import { connect } from 'react-redux'
-import PostList from '../components/PublishedPostList.js.jsx'
+import PostList from '../components/PublishedPostList'
 import { bindActionCreators } from 'redux'
 import fetchPosts from '../modules/actions'
 

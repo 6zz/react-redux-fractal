@@ -11,9 +11,14 @@ const PublishedPostListItem = ({ post }) => {
     bgImg = { backgroundImage: `url(${post.bannerMediaPath})` };
   }
 
+  let linkTo = {
+    pathname: `/stories/${post.slug}`,
+    state: { post },
+  }
+
   return (
 
-      <Link  className="action-link" to={`/stories/${post.slug}`}>
+      <Link  className="action-link" to={linkTo}>
         <div className="action-card">
           <hr className="divider" />
           <div className="details">

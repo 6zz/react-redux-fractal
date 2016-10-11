@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react';
-import Base from "../../../components/BaseComponent.js.jsx";
-import PublishedPostListItem from './PublishedPostListItem.js.jsx';
+import Base from "../../../components/BaseComponent";
+import PublishedPostListItem from './PublishedPostListItem';
 
 //import PublishedFeaturedPostListItem from './PublishedFeaturedPostListItem.js.jsx';
 
@@ -16,8 +16,8 @@ class PublishedPostList extends Base {
 
   }
 
-  componentWillMount() {
-    console.log('PublishedPostList::componentWillMount() fetching posts');
+  componentDidMount() {
+    console.log('PublishedPostList::componentDidMount() fetching posts');
     this.props.fetchPosts()
   }
 
@@ -32,14 +32,12 @@ class PublishedPostList extends Base {
   render() {
     const list = this.props.posts;
     const { typeFilter } = this.state;
-    console.log("TYPE FILTER: " + typeFilter);
     const isEmpty = list.length === 0;
     // TODO: need to get featured stories
     let filteredStories = list;
     list.featured = [];
 
     filteredStories.sort((a,b) => {
-      console.log(a.date);
       return (new Date(b.date).getTime() - new Date(a.date).getTime())
     });
 

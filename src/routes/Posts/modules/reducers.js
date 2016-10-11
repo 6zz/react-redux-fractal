@@ -6,6 +6,7 @@ import {
 function postsReducer (state = {
   items: []
 }, action) {
+  console.log('PostList Reducer', action);
   switch (action.type) {
     case REQUEST_POSTS:
       console.log('requesting posts...')
