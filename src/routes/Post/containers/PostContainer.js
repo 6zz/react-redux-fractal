@@ -4,7 +4,6 @@ import { bindActionCreators } from 'redux'
 // import fetchPost from '../modules/actions'
 
 const mapStateToProps = (state) => {
-  console.log('SinglePost>mapStateToProps', state);
   return ({ item: state.story.post })
 }
 

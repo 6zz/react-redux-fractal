@@ -13,7 +13,7 @@ const PublishedPostListItem = ({ post }) => {
 
   let linkTo = {
     pathname: `/stories/${post.slug}`,
-    state: { post },
+    state: post
   }
 
   return (
