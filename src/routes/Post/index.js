@@ -1,14 +1,25 @@
 import { injectReducer } from '../../store/reducers'
-import SinglePost from './containers/PostContainer'
-import reducer from './modules/reducers'
 
 export default (store) => {
-  return ({
+  return {
     onEnter: () => {
       console.log('entering SinglePost route');
-      injectReducer(store, { key: 'singlePost', reducer })
     },
     path: 'stories/:slug',
-    component: SinglePost
-  })
+    getComponent (nextState, cb) {
+      require.ensure([], (require) => {
+        /*  Webpack - use require callback to define
+            dependencies for bundling   */
+        const SinglePost = require('./containers/PostContainer').default
+        const reducer = require('./modules/reducers').default
+
+        /*  Add the reducer to the store on key 'counter'  */
+        injectReducer(store, { key: 'story', reducer })
+        /*  Return getComponent   */
+        cb(null, SinglePost)
+
+      /* Webpack named bundle   */
+      }, 'story')
+    }
+  }
 }

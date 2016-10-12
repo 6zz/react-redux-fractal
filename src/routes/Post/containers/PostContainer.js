@@ -5,7 +5,7 @@ import { bindActionCreators } from 'redux'
 
 const mapStateToProps = (state) => {
   console.log('SinglePost>mapStateToProps', state);
-  return ({ post: state.post })
+  return ({ item: state.story.post })
 }
 
 // const mapDispatchToProps = (dispatch) => ({

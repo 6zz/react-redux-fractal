@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react';
 import Base from "../../../components/BaseComponent";
 // import Draft from 'draft-js';
-// import moment from 'moment';
+import moment from 'moment';
 //
 // import { defaultDecorators, styleMap } from '../../../global/utils/editorUtils';
 //
@@ -32,9 +32,6 @@ class PopulatedPost extends Base {
   }
 
   componentDidMount() {
-    console.log("Single post componentDidMount *****");
-    console.log('route params', this.props.routeParams);
-
     var js, link;
     link = this.refs.twitterLink;
     if (!this.initialized) {
@@ -48,9 +45,13 @@ class PopulatedPost extends Base {
 
   render() {
     const { item } = this.props;
-    const isEmpty = !item._id;
+
+    if (!item) {
+      return null
+    }
+
+    const isEmpty = !item.id;
     // const isEmpty = true;
-    const updated = !isEmpty ? moment(item.updated).calendar() : '';
     const displayDate = moment(item.date).format("MMM D YYYY");
     console.log("isEmpty", isEmpty);
     console.log(item);
@@ -98,8 +99,6 @@ class PopulatedPost extends Base {
     //   }
     //   loaded = true;
     // }
-    console.log(item);
-    console.log('load gif');
 
     return  (
       <div className="flex ">
@@ -136,6 +135,7 @@ class PopulatedPost extends Base {
                 </div>
                 : null
               }
+              <div dangerouslySetInnerHTML={{ __html: item.content.rendered }} />
             </div>
           }
         </section>
@@ -162,7 +162,7 @@ class PopulatedPost extends Base {
   } // end render()
 
   static propTypes = {
-    post: PropTypes.object.isRequired
+    item: PropTypes.object.isRequired
   }
 }
 //
