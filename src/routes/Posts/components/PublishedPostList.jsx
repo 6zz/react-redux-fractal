@@ -1,6 +1,7 @@
 import React, { PropTypes } from 'react';
-import Base from "../../../components/BaseComponent";
+import Base from '../../../components/BaseComponent';
 import PublishedPostListItem from './PublishedPostListItem';
+import APIS from '../../../utils/apis'
 
 //import PublishedFeaturedPostListItem from './PublishedFeaturedPostListItem.js.jsx';
 
@@ -17,8 +18,9 @@ class PublishedPostList extends Base {
   }
 
   componentDidMount() {
-    console.log('PublishedPostList::componentDidMount() fetching posts');
-    this.props.fetchPosts()
+    const api = APIS.postList()
+    console.log(`PublishedPostList::componentDidMount() fetching posts from ${api}`);
+    this.props.fetchPosts(api)
   }
 
   _changeTypeFilter(e) {

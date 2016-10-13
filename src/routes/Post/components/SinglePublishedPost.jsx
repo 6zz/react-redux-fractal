@@ -1,5 +1,7 @@
 import React, { PropTypes } from 'react';
-import Base from "../../../components/BaseComponent";
+import Base from '../../../components/BaseComponent';
+import APIS from '../../../utils/apis'
+import { get } from 'lodash'
 // import Draft from 'draft-js';
 import moment from 'moment';
 //
@@ -29,16 +31,22 @@ class PopulatedPost extends Base {
 
   componentWillMount() {
     console.log('Single post componentWillMount *****');
+    const { item, routeParams, fetchPosts } = this.props
+    if (item === null) {
+      const api = APIS.postSingle(routeParams.slug)
+      console.log(`fetching post from ${api}`)
+      fetchPosts(api)
+    }
   }
 
   componentDidMount() {
     var js, link;
     link = this.refs.twitterLink;
-    if (!this.initialized) {
+    if (!this.initialized && link) {
       this.initialized = true;
-      js = document.createElement("script");
-      js.id = "twitter-wjs";
-      js.src = "//platform.twitter.com/widgets.js";
+      js = document.createElement('script');
+      js.id = 'twitter-wjs';
+      js.src = '//platform.twitter.com/widgets.js';
       return link.parentNode.appendChild(js);
     }
   }
@@ -46,29 +54,22 @@ class PopulatedPost extends Base {
   render() {
     const { item } = this.props;
 
-    if (!item) {
-      return null
-    }
+    const isEmpty = !item || !item.id;
 
-    const isEmpty = !item.id;
-    // const isEmpty = true;
-    const displayDate = moment(item.date).format("MMM D YYYY");
-    console.log("isEmpty", isEmpty);
-    console.log(item);
+    const displayDate = moment(get(item, 'date', '')).format('MMM D YYYY');
     let loaded = false;
-    const noSummary = !item.summary;
-    if(item.author && item.author.username) {
-      var author = item.author.username;
-    } else {
-      var author = "Anonymous";
+    const noSummary = ! get(item, 'summary');
+    let author = get(item, 'author.username');
+    if(!author) {
+      author = 'Anonymous';
     }
 
-    let storyTitle = isEmpty ? "Carbon" : item.title;
-    // const author = item.author.username ? item.author.username : "anonymous"
+    let storyTitle = get(item, 'title', 'Carbon')
+    // const author = item.author.username ? item.author.username : 'anonymous'
 
     //get draftjs content
     // if(!isEmpty) {
-    //   console.log("NOT EMPTY");
+    //   console.log('NOT EMPTY');
     //   console.log(item.contentArray);
     //   // const content = convertFromRaw(item.draftJSContent);
     //   // const contentState = ContentState.createFromBlockArray(content)
@@ -76,7 +77,7 @@ class PopulatedPost extends Base {
     //
     //   for(var i = 0; i < item.contentArray.length; i++) {
     //     if(item.contentArray[i].type == 'draftjs') {
-    //       console.log("found draftjs type at position " + i);
+    //       console.log('found draftjs type at position ' + i);
     //       console.log(item.contentArray[i].args);
     //       // console.log(item.contentArray[i].args.draftJSContent == null);
     //       //create its editorstate
@@ -92,7 +93,7 @@ class PopulatedPost extends Base {
     //         item.contentArray[i].editorState = EditorState.createWithContent(contentState, defaultDecorators);
     //       }
     //       else {
-    //         console.log("CREATING AN EMPTY ONE");
+    //         console.log('CREATING AN EMPTY ONE');
     //         item.contentArray[i].editorState = EditorState.createEmpty(defaultDecorators);
     //       }
     //     }
@@ -101,27 +102,27 @@ class PopulatedPost extends Base {
     // }
 
     return  (
-      <div className="flex ">
-        <section className="section top-spacer-only story-details">
+      <div className='flex '>
+        <section className='section top-spacer-only story-details'>
           {isEmpty
-          ? ( !loaded && item.isFetching ?
-            <div className="yt-container slim"><div className="hero flex center full"><h2 className="loader"><i className="ion ion-load-c fa-spin" /></h2></div></div>
-            : <div className="yt-container slim"><div className="hero flex center full"><h2 className="loader"><i className="ion ion-load-c fa-spin" /></h2></div></div>
+          ? ( !loaded ?
+            <div className='yt-container slim'><div className='hero flex center full'><h2 className='loader'><i className='ion ion-load-c fa-spin' /></h2></div></div>
+            : <div className='yt-container slim'><div className='hero flex center full'><h2 className='loader'><i className='ion ion-load-c fa-spin' /></h2></div></div>
             )
             :
             <div style={{ opacity: item.isFetching ? 0.5 : 1 }}>
-              <div className="yt-container slim">
-                <div className="page-title story-title">
+              <div className='yt-container slim'>
+                <div className='page-title story-title'>
 
-                  <h1 className="no-spacer"> { item.title }</h1>
+                  <h1 className='no-spacer'> { item.title }</h1>
                 </div>
                 {!noSummary ?
-                  <div className="story-summary">
-                    <div className="content story-content">
-                      <div className="main-copy">
-                        <div className="eyebrow title"> {displayDate}</div>
-                        <div className="eyebrow content">
-                          <p className="large ">{item.summary}</p>
+                  <div className='story-summary'>
+                    <div className='content story-content'>
+                      <div className='main-copy'>
+                        <div className='eyebrow title'> {displayDate}</div>
+                        <div className='eyebrow content'>
+                          <p className='large '>{item.summary}</p>
                         </div>
                       </div>
                     </div>
@@ -130,8 +131,8 @@ class PopulatedPost extends Base {
                 }
               </div>
               { (item.bannerMediaPath) ?
-                <div className="yt-container">
-                  <img className="story-banner" src={`${item.bannerMediaPath}`} />
+                <div className='yt-container'>
+                  <img className='story-banner' src={`${item.bannerMediaPath}`} />
                 </div>
                 : null
               }
@@ -139,17 +140,17 @@ class PopulatedPost extends Base {
             </div>
           }
         </section>
-        <section className="section no-spacer  newsletter-share">
-          <div className="yt-container top-spacer_50 bottom-spacer_50 slim">
+        <section className='section no-spacer  newsletter-share'>
+          <div className='yt-container top-spacer_50 bottom-spacer_50 slim'>
             <hr/>
-            <div className="yt-row center-vert space-between">
+            <div className='yt-row center-vert space-between'>
 
-              <a href="https://twitter.com/share"
-                className="twitter-share-button"
-                data-via="carbon3d"
+              <a href='https://twitter.com/share'
+                className='twitter-share-button'
+                data-via='carbon3d'
                 data-text={storyTitle}
-                id="twitter-wjs"
-                ref="twitterLink"
+                id='twitter-wjs'
+                ref='twitterLink'
               > Tweet
               </a>
             </div>
@@ -162,7 +163,7 @@ class PopulatedPost extends Base {
   } // end render()
 
   static propTypes = {
-    item: PropTypes.object.isRequired
+    item: PropTypes.object
   }
 }
 //
