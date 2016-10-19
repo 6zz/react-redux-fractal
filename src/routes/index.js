@@ -16,6 +16,11 @@ export const createRoutes = (store) => ({
     CounterRoute(store),
     PostsRoute(store),
     PostRoute(store),
+    // redirect /:slug => /stories/:slug
+    {
+      path: ':slug',
+      onEnter: ({ params }, replace) => replace(`/stories/${params.slug}`)
+    },
   ]
 })
 
