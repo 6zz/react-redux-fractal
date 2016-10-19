@@ -33,7 +33,7 @@ class PopulatedPost extends Base {
     console.log('Single post componentWillMount *****');
     const { item, routeParams, fetchPosts } = this.props
     if (item === null) {
-      const api = APIS.postSingle(routeParams.slug)
+      const api = APIS.postSingle(routeParams.slug, 'es')
       console.log(`fetching post from ${api}`)
       fetchPosts(api)
     }
