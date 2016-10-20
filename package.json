@@ -52,7 +52,6 @@
       "command": "npm run deploy",
       "env": {
         "NODE_ENV": "production",
-        "PORT": 8888,
         "DEBUG": "app:*"
       }
     },
