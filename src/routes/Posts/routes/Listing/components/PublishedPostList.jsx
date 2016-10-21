@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react';
-import Base from '../../../components/BaseComponent';
+import Base from '../../../../../components/BaseComponent';
 import PublishedPostListItem from './PublishedPostListItem';
-import APIS from '../../../utils/apis'
+import APIS from '../../../../../utils/apis'
 
 //import PublishedFeaturedPostListItem from './PublishedFeaturedPostListItem.js.jsx';
 

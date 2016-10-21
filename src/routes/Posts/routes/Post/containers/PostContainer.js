@@ -1,7 +1,7 @@
 import { connect } from 'react-redux'
 import SinglePost from '../components/SinglePublishedPost'
 import { get  } from 'lodash'
-import { fetchPosts } from '../../../store/posts'
+import { fetchPosts } from '../../../../../store/posts'
 import { bindActionCreators } from 'redux'
 // import fetchPost from '../modules/actions'
 

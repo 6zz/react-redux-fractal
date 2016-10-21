@@ -1,24 +1,12 @@
-import { injectReducer } from '../../store/reducers'
+import Listing from './components/ListingView'
+import PostsRoute from './routes/Listing'
+import SingleRoute from './routes/Post'
 
 export default (store) => ({
-  onEnter: () => {
-    console.log('entering PostList route');
-  },
-  path: 'stories',
-  getComponent (nextState, cb) {
-    require.ensure([], (require) => {
-      /*  Webpack - use require callback to define
-          dependencies for bundling   */
-      const PostList = require('./containers/PostListContainer').default
-      const reducer = require('../../store/posts').default
-
-      /*  Add the reducer to the store on key 'counter'  */
-      injectReducer(store, { key: 'posts', reducer })
-      /*  Return getComponent   */
-      cb(null, PostList)
-
-    /* Webpack named bundle   */
-    }, 'stories')
-  },
-
+  path:        'stories',
+  component:   Listing,
+  indexRoute:  PostsRoute(store),
+  childRoutes: [
+    SingleRoute(store)
+  ]
 })
