@@ -25,6 +25,13 @@ function receivePosts (json) {
   }
 }
 
+const REQUEST_FAILURE = 'REQUEST_FAILURE'
+function fetchError () {
+  return {
+    type: REQUEST_FAILURE
+  }
+}
+
 /**
  * returns an asncy thunk for fetching posts through the rest api
  * @param  {sting} api rest api to execute
@@ -39,6 +46,10 @@ export function fetchPosts (api) {
       .then(json => {
         console.log('fetch result', json)
         dispatch(receivePosts(json))
+      })
+      .catch(error => {
+        console.log('request failed:', error.message);
+        dispatch(fetchError())
       })
   }
 }

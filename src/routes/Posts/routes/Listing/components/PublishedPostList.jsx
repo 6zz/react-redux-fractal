@@ -62,10 +62,8 @@ class PublishedPostList extends Base {
 
             <div className="yt-container slim">
               <div className="page-title">
-                <h1> Stories </h1>
-                <p className="large">
-                Come behind the scenes. These are the stories of our customers, our culture and our vision for the future of manufacturing.
-                </p>
+                <h1 data-l10n-id='posts-heading'></h1>
+                <p className="large" data-l10n-id='posts-intro'></p>
 
               </div>
             </div>
