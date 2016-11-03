@@ -1,11 +1,11 @@
 {
-  "name": "react-redux-starter-kit",
-  "version": "3.0.0-alpha.2",
-  "description": "Get started with React, Redux, and React-Router!",
+  "name": "c3d-spa",
+  "version": "0.0.1",
+  "description": "Single page app for wordpress theme",
   "main": "index.js",
   "engines": {
     "node": ">=4.5.0",
-    "npm": "^3.0.0"
+    "yarn": "^0.16.1"
   },
   "scripts": {
     "clean": "rimraf dist",
@@ -71,9 +71,9 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/davezuko/react-redux-starter-kit.git"
+    "url": "git+git@gitlab.level-studios.com:carbon3d/c3d-spa.git"
   },
-  "author": "David Zukowski <david@zuko.me> (http://zuko.me)",
+  "author": "shawn zhu <shawn.zhu@level-studios.com>",
   "license": "MIT",
   "dependencies": {
     "react": "^15.0.0",
