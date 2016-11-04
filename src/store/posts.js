@@ -9,6 +9,14 @@ function requestPosts () {
   }
 }
 
+const REQUEST_FAILURE = 'REQUEST_FAILURE'
+function requestFailed (error) {
+  console.log('request failed:', error.message)
+  return {
+    type: REQUEST_FAILURE
+  }
+}
+
 export const RECEIVE_POSTS = 'RECEIVE_POSTS'
 function receivePosts (json) {
   return {
@@ -22,13 +30,6 @@ function receivePosts (json) {
         }
       )
     ))
-  }
-}
-
-const REQUEST_FAILURE = 'REQUEST_FAILURE'
-function fetchError () {
-  return {
-    type: REQUEST_FAILURE
   }
 }
 
@@ -48,8 +49,7 @@ export function fetchPosts (api) {
         dispatch(receivePosts(json))
       })
       .catch(error => {
-        console.log('request failed:', error.message);
-        dispatch(fetchError())
+        dispatch(requestFailed(error))
       })
   }
 }
