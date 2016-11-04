@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react';
-import Base from '../../../../../components/BaseComponent';
-import APIS from '../../../../../utils/apis'
+import Base from 'components/BaseComponent';
+import APIS from 'utils/apis'
 import { get } from 'lodash'
 // import Draft from 'draft-js';
 import moment from 'moment';
