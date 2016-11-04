@@ -9,6 +9,14 @@ function requestPosts () {
   }
 }
 
+const REQUEST_FAILURE = 'REQUEST_FAILURE'
+function requestFailed (error) {
+  console.log('request failed:', error.message)
+  return {
+    type: REQUEST_FAILURE
+  }
+}
+
 export const RECEIVE_POSTS = 'RECEIVE_POSTS'
 function receivePosts (json) {
   return {
@@ -39,6 +47,9 @@ export function fetchPosts (api) {
       .then(json => {
         console.log('fetch result', json)
         dispatch(receivePosts(json))
+      })
+      .catch(error => {
+        dispatch(requestFailed(error))
       })
   }
 }
