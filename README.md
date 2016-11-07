@@ -1,4 +1,4 @@
-# Theme: c3d - a Single Page Application for wordpress
+# a fractal structured react-redux starter kit with L20n
 This repo is based on [react-redux-starter-kit](https://github.com/davezuko/react-redux-starter-kit); please visit the starter kit's github page to get an overview.  This project has evolved to include some more features.  Specifically, we are using [yarn](https://github.com/yarnpkg/yarn) because it's "Fast, reliable, and secure dependency management".
 
 ## Features
@@ -10,6 +10,7 @@ This repo is based on [react-redux-starter-kit](https://github.com/davezuko/reac
 * [express](https://github.com/expressjs/express)
 * [karma](https://github.com/karma-runner/karma)
 * [eslint](http://eslint.org)
+* [l20n](http://l20n.org)
 
 ## Requirements
 * "node": ">=4.5.0",
